@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>Custom Directive</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	</head>
+	<body>
+	<section ng-app = "sampleApp">
+		<section  ng-controller = "ctrlApp">
+		<input ng-model = "value"/>
+			<button ng-vijay = "printValue(value)">ng-vijay</button>	
+		</section>
+	</section>
+	<script src="lib/js/angular.js"></script>
+	<script type="text/javascript">
+	angular.module("sampleApp",[])
+	.controller("ctrlApp",function($scope){
+		$scope.value = "Manual";
+		$scope.printValue = function(model){
+			console.log('printing from ctrl -----> ', model);
+		};
+	}).directive('ngVijay', function($parse){
+		return {
+			restrict:'A',
+			scope:{
+				ngVijay:'&'
+			},
+			link:function(scope, elem, attr){
+				elem.on('click', function(){
+					$parse(scope.ngVijay)(scope);
+				});
+			}
+		};
+	});
+	
+	</script>
+	</body>
+</html>
+
+<!-- Angular User Defined Click Event -->
